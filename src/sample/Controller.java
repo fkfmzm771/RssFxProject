@@ -8,8 +8,10 @@ import VO.Nyaa_si_FeedMessage;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,10 +37,12 @@ public class Controller implements Initializable {
     private TableColumn<TableRowDataModel, String> size_Column;
     @FXML
     private TableColumn<TableRowDataModel, String> pageLink_Column;
+    @FXML
+    private Button btn_src;
+
 
     private NyaaFeedParser parser;
     private Nyaa_si_Feed feed;
-    private List<Nyaa_si_FeedMessage> torrentList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,37 +62,45 @@ public class Controller implements Initializable {
 
 
     public void btnTest() {
-        parser = new NyaaFeedParser("https://nyaa.si/?page=rss&q=baki von 1080&c=0_0&f=0");
-        feed = parser.readFeed();
-        torrentList = new ArrayList<>();
+        System.out.println("삭제 결과" + myTableView.getItems().removeAll());
+        btn_src.setDisable(true);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                parser = new NyaaFeedParser("https://nyaa.si/?page=rss&q=baki&c=0_0&f=0");
+                feed = parser.readFeed();
+                List<Nyaa_si_FeedMessage> torrentList = new ArrayList<>();
 
-        try {
-            for (Nyaa_si_FeedMessage message : feed.getMessages()) {
-                parser.saveUrlList(new FileData(message.getTitle(), message.getLink()));
-                torrentList.add(message);
-                System.out.println(message);
+                try {
+                    for (Nyaa_si_FeedMessage message : feed.getMessages()) {
+                        parser.saveUrlList(new FileData(message.getTitle(), message.getLink()));
+                        torrentList.add(message);
+                        System.out.println(message);
 //            parser.saveFile();
 
-                TableRowDataModel mm = new TableRowDataModel(
-                        new SimpleStringProperty(message.getTitle())
-                        , new SimpleStringProperty(message.getNyaa_category())
-                        , new SimpleStringProperty(message.getPubDate())
-                        , new SimpleStringProperty(message.getNyaa_seeders())
-                        , new SimpleStringProperty(message.getNyaa_downloads())
-                        , new SimpleStringProperty(message.getNyaa_size())
-                        , new SimpleStringProperty(message.getLink())
-                );
-                myTableView.getItems().add(mm);
-
+                        TableRowDataModel mm = new TableRowDataModel(
+                                new SimpleStringProperty(message.getTitle())
+                                , new SimpleStringProperty(message.getNyaa_category())
+                                , new SimpleStringProperty(message.getPubDate())
+                                , new SimpleStringProperty(message.getNyaa_seeders())
+                                , new SimpleStringProperty(message.getNyaa_downloads())
+                                , new SimpleStringProperty(message.getNyaa_size())
+                                , new SimpleStringProperty(message.getLink())
+                        );
+                        myTableView.getItems().add(mm);
+                    }
+                } catch (Exception e) {
+                    System.out.println("검색된 파일이 없습니다.");
+                } finally {
+                    btn_src.setDisable(false);
+                }
             }
-
-
-        } catch (Exception e) {
-            System.out.println("검색된 파일이 없습니다.");
-        }
-
+        };
+        Thread srcThread = new Thread(runnable);
+        srcThread.start();
     }
-    public void check_Down(){
+
+    public void check_Down() {
         parser.saveFile(6);
     }
 
