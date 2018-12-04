@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java.DAO.Mapper">
+
+    <!--//토런트 데이터-->
+    <insert id="insertRssTorrent" parameterType="java.VO.Nyaa_si_FeedMessage">
+        INSERT INTO srcTorrent
+        (
+        to_title
+        , to_link
+        ,to_guId
+        ,to_pubDate
+        ,to_seeders
+        ,to_downloads
+        ,to_infoHash
+        ,to_categoryID
+        ,to_category
+        ,to_to_size
+        ,to_alias
+        ,to_downloadCheck
+        ,to_lastDownDate
+        )
+        VALUES
+        (
+        #{title}
+        , #{link}
+        , #{guid}
+        , #{pubDate}
+        , #{nyaa_seeders}
+        , #{nyaa_leechers}
+        , #{nyaa_downloads}
+        , #{nyaa_infoHash}
+        , #{nyaa_categoryId}
+        , #{nyaa_category}
+        , #{nyaa_size}
+        , #{user_alias}
+        , #{user_downCheck}
+        , #{user_lastDownDate}
+        )
+    </insert>
+
+    <!--//Rss 검색 항목-->
+    <select id="insertUserSrcRss" resultType="java.VO.SrcRss" parameterType="java.VO.SrcRss">
+        INSERT INTO userRss
+        (
+        src_alias
+        ,src_rssAdr
+        )
+        VALUES
+        (
+        #{src_alias}
+        , #{src_rssAdr}
+        )
+    </select>
+
+    <!--//즐겨찾기 항목-->
+    <select id="insertUserRss" resultType="java.VO.UserRss" parameterType="java.VO.UserRss">
+        INSERT INTO userRss
+        (
+        to_alias
+        ,to_rssAdr
+        )
+        VALUES
+        (
+        #{alias}
+        , #{rssAdr}
+        )
+    </select>
+
+
+    <!--<select id="selectAllBoard" resultType="VO.Board">-->
+        <!--select-->
+        <!--boardseq,-->
+        <!--id,-->
+        <!--boardtitle,-->
+        <!--boardcontent,-->
+        <!--indate,-->
+        <!--hitcount-->
+        <!--from-->
+        <!--board-->
+    <!--</select>-->
+
+    <!--<update id="increseHit" parameterType="String">-->
+        <!--update board set-->
+        <!--hitcount=hitcount+1-->
+        <!--where boardseq=#{boardSeq}-->
+    <!--</update>-->
+
+</mapper>

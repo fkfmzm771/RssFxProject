@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane hgap="5.0" maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+    </rowConstraints>
+    <children>
+        <TableView fx:id="myTableView" prefHeight="573.0" prefWidth="771.0" tableMenuButtonVisible="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <columns>
+                <TableColumn fx:id="title_Column" prefWidth="281.0" text="이름" />
+                <TableColumn fx:id="category_Column" prefWidth="72.0" text="분류" />
+                <TableColumn fx:id="pubDate_Column" prefWidth="107.0" text="등록일" />
+                <TableColumn fx:id="seeder_Column" prefWidth="56.0" text="시더" />
+                <TableColumn fx:id="down_Column" prefWidth="75.0" text="다운로드 누적" />
+                <TableColumn fx:id="size_Column" prefWidth="66.0" text="크기" />
+                <TableColumn fx:id="pageLink_Column" prefWidth="111.0" text="페이지 링크" />
+            </columns>
+        </TableView>
+        <Pane prefHeight="49.0" prefWidth="500.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <children>
+                <TextField layoutX="259.0" layoutY="6.0" prefHeight="37.0" prefWidth="430.0" />
+                <Button layoutX="699.0" layoutY="5.0" mnemonicParsing="false" onAction="#btnTest" prefHeight="37.0" prefWidth="65.0" text="검색" />
+                <ComboBox layoutX="3.0" layoutY="12.0" prefHeight="25.0" prefWidth="215.0" />
+            <ProgressIndicator layoutX="227.0" layoutY="14.0" progress="0.0" />
+            </children>
+        </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <ListView layoutX="9.0" layoutY="-1.0" prefHeight="558.0" prefWidth="191.0" />
+         </children></Pane>
+      <Pane prefHeight="63.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Button layoutX="18.0" layoutY="6.0" mnemonicParsing="false" onAction="#btnRss" prefHeight="37.0" prefWidth="173.0" text="RSS 주소 추가" />
+         </children></Pane>
+      <Pane prefHeight="52.0" prefWidth="771.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+         <children>
+            <Button id="check_Down" layoutX="479.0" layoutY="7.0" mnemonicParsing="false" onAction="#check_Down" prefHeight="37.0" prefWidth="132.0" text="선택 항목 다운" />
+            <Button layoutX="625.0" layoutY="7.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="132.0" text="전체 목록 다운" />
+            <TextField layoutX="81.0" layoutY="7.0" prefHeight="37.0" prefWidth="382.0" />
+            <Button layoutY="7.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="79.0" text="저장 위치" />
+         </children>
+      </Pane>
+      <Pane prefHeight="78.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <children>
+            <Button layoutX="18.0" layoutY="6.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="173.0" text="즐겨찾기 추가" />
+         </children>
+      </Pane>
+    </children>
+</GridPane>
