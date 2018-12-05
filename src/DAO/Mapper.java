@@ -1,7 +1,7 @@
 package DAO;
 
-import DBVO.SrcRss;
-import DBVO.UserRss;
+import VO.SrcRss;
+import VO.UserRss;
 import VO.Nyaa_si_FeedMessage;
 
 import java.util.ArrayList;
@@ -9,9 +9,10 @@ import java.util.ArrayList;
 public interface Mapper {
 
 
-	public ArrayList<Nyaa_si_FeedMessage> insertRssTorrent();
-	public ArrayList<SrcRss> insertUserSrcRss();
-	public ArrayList<UserRss> insertUserRss();
+	public int insertRssTorrent(Nyaa_si_FeedMessage feedMessage);
+	public int insertSrcRss(SrcRss srcRss);
+	public int insertUserRss(UserRss userRss);
+
 
 
 }

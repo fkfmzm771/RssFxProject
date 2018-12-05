@@ -8,7 +8,7 @@ CREATE TABLE userSrcRss (
 , src_rssAdr varchar2(200)
 );
 
-DROP TABLE userrss;
+DROP TABLE userRss;
 
 CREATE TABLE srcTorrent (
     to_title varchar2(50)

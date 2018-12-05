@@ -12,24 +12,15 @@ public class Nyaa_si_FeedMessage {
 	private String nyaa_categoryId; //카테고리 아이디
 	private String nyaa_category;   //카테고리
 	private String nyaa_size;   //파일 용량
+	private String user_alias;   //파일 용량
+	private String user_downCheck;   //파일 용량
+	private String user_lastDownDate;   //파일 용량
 
 
 	public Nyaa_si_FeedMessage() {
 	}
 
-	public Nyaa_si_FeedMessage(
-			String title
-			, String link
-			, String guid
-			, String pubDate
-			, String nyaa_seeders
-			, String nyaa_leechers
-			, String nyaa_downloads
-			, String nyaa_infoHash
-			, String nyaa_categoryId
-			, String nyaa_category
-			, String nyaa_size
-	) {
+	public Nyaa_si_FeedMessage(String title, String link, String guid, String pubDate, String nyaa_seeders, String nyaa_leechers, String nyaa_downloads, String nyaa_infoHash, String nyaa_categoryId, String nyaa_category, String nyaa_size, String user_alias, String user_downCheck, String user_lastDownDate) {
 		this.title = title;
 		this.link = link;
 		this.guid = guid;
@@ -41,6 +32,9 @@ public class Nyaa_si_FeedMessage {
 		this.nyaa_categoryId = nyaa_categoryId;
 		this.nyaa_category = nyaa_category;
 		this.nyaa_size = nyaa_size;
+		this.user_alias = user_alias;
+		this.user_downCheck = user_downCheck;
+		this.user_lastDownDate = user_lastDownDate;
 	}
 
 	public String getTitle() {
@@ -131,20 +125,47 @@ public class Nyaa_si_FeedMessage {
 		this.nyaa_size = nyaa_size;
 	}
 
+	public String getUser_alias() {
+		return user_alias;
+	}
+
+	public void setUser_alias(String user_alias) {
+		this.user_alias = user_alias;
+	}
+
+	public String getUser_downCheck() {
+		return user_downCheck;
+	}
+
+	public void setUser_downCheck(String user_downCheck) {
+		this.user_downCheck = user_downCheck;
+	}
+
+	public String getUser_lastDownDate() {
+		return user_lastDownDate;
+	}
+
+	public void setUser_lastDownDate(String user_lastDownDate) {
+		this.user_lastDownDate = user_lastDownDate;
+	}
+
 	@Override
 	public String toString() {
-		return "Nyaa_si{" +
+		return "Nyaa_si_FeedMessage{" +
 				"title='" + title + '\'' +
-				"\n, link='" + link + '\'' +
-				"\n, guid='" + guid + '\'' +
-				"\n, pubDate='" + pubDate + '\'' +
-				"\n, nyaa_seeders='" + nyaa_seeders + '\'' +
-				"\n, nyaa_leechers='" + nyaa_leechers + '\'' +
-				"\n, nyaa_downloads='" + nyaa_downloads + '\'' +
-				"\n, nyaa_infoHash='" + nyaa_infoHash + '\'' +
-				"\n, nyaa_categoryId='" + nyaa_categoryId + '\'' +
-				"\n, nyaa_category='" + nyaa_category + '\'' +
-				"\n, nyaa_size='" + nyaa_size + '\'' +
+				", link='" + link + '\'' +
+				", guid='" + guid + '\'' +
+				", pubDate='" + pubDate + '\'' +
+				", nyaa_seeders='" + nyaa_seeders + '\'' +
+				", nyaa_leechers='" + nyaa_leechers + '\'' +
+				", nyaa_downloads='" + nyaa_downloads + '\'' +
+				", nyaa_infoHash='" + nyaa_infoHash + '\'' +
+				", nyaa_categoryId='" + nyaa_categoryId + '\'' +
+				", nyaa_category='" + nyaa_category + '\'' +
+				", nyaa_size='" + nyaa_size + '\'' +
+				", user_alias='" + user_alias + '\'' +
+				", user_downCheck='" + user_downCheck + '\'' +
+				", user_lastDownDate='" + user_lastDownDate + '\'' +
 				'}';
 	}
 }

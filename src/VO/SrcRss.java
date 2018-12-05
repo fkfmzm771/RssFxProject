@@ -1,4 +1,4 @@
-package DBVO;
+package VO;
 
 public class SrcRss {
     private String src_alias;

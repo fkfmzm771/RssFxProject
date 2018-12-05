@@ -1,4 +1,4 @@
-package DBVO;
+package VO;
 
 public class UserRss {
     private String alias;

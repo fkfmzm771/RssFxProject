@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="java.DAO.Mapper">
+<mapper namespace="DAO.Mapper">
 
     <!--//토런트 데이터-->
-    <insert id="insertRssTorrent" parameterType="java.VO.Nyaa_si_FeedMessage">
+    <insert id="insertRssTorrent" parameterType="VO.Nyaa_si_FeedMessage">
         INSERT INTO srcTorrent
         (
         to_title
-        , to_link
+        ,to_link
         ,to_guId
         ,to_pubDate
         ,to_seeders
+        ,to_leechers
         ,to_downloads
         ,to_infoHash
         ,to_categoryID
@@ -40,8 +41,8 @@
         )
     </insert>
 
-    <!--//Rss 검색 항목-->
-    <select id="insertUserSrcRss" resultType="java.VO.SrcRss" parameterType="java.VO.SrcRss">
+    <!--//Rss 검색 주소 항목-->
+    <select id="insertSrcRss" resultType="VO.SrcRss" parameterType="VO.SrcRss">
         INSERT INTO userRss
         (
         src_alias
@@ -55,7 +56,7 @@
     </select>
 
     <!--//즐겨찾기 항목-->
-    <select id="insertUserRss" resultType="java.VO.UserRss" parameterType="java.VO.UserRss">
+    <select id="insertUserRss" resultType="VO.UserRss" parameterType="VO.UserRss">
         INSERT INTO userRss
         (
         to_alias

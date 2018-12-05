@@ -17,7 +17,6 @@ import javax.xml.stream.events.XMLEvent;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,78 +49,73 @@ public class NyaaFeedParser {
 
     //torrent 파일 저장
     public void saveFile(int listNum) {
-        OutputStream out = null;
-        InputStream in = null;
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OutputStream out = null;
+                InputStream in = null;
 
-        try {
+                try {
+                    if (listNum < 0) {
+                        for (int i = 0; i < nyaaUrlList.size(); i++) {
+                            String name = nyaaUrlList.get(i).getFileName();
+                            name = name.replaceAll("/","_");
+                            URL url = new URL(nyaaUrlList.get(i).getFileUrl());
 
-            if (listNum < 0) {
-                for (int i = 0; i < nyaaUrlList.size(); i++) {
-                    String name = nyaaUrlList.get(i).getFileName();
-                    URL url = new URL(nyaaUrlList.get(i).getFileUrl());
+                            String dirFile = "D:\\RssExam\\" + name + ".torrent";
+                            String path = dirFile.substring(0, dirFile.lastIndexOf(File.separator));
 
-                    String dirFile = "D:\\RssExam\\" + name + ".torrent";
-                    String path = dirFile.substring(0, dirFile.lastIndexOf(File.separator));
+                            File f = new File(path);
+                            if (!f.exists()) f.mkdirs();
+                            File filePath = new File(dirFile);
 
-                    File f = new File(path);
-                    if (!f.exists()) {
-                        f.mkdirs();
-                    }
-                    File filePath = new File(dirFile);
+                            CloseableHttpClient client = HttpClients.createDefault();
+                            try (CloseableHttpResponse response = client.execute(new HttpGet(String.valueOf(url)))) {
+                                HttpEntity entity = response.getEntity();
+                                if (entity != null) {
+                                    try (FileOutputStream outstream = new FileOutputStream(filePath)) {
+                                        entity.writeTo(outstream);
+                                    }
+                                }
+                            }
+                            System.out.println(nyaaUrlList.get(i).getFileName() + " 다운 완료");
+                        }
+                    } else {
+                        String name = nyaaUrlList.get(listNum).getFileName();
+                        name.replace('\\','_');
+                        URL url = new URL(nyaaUrlList.get(listNum).getFileUrl());
 
+                        String dirFile = "D:\\RssExam\\" + name + ".torrent";
+                        String path = dirFile.substring(0, dirFile.lastIndexOf(File.separator));
 
-                    CloseableHttpClient client = HttpClients.createDefault();
-                    try (CloseableHttpResponse response = client.execute(new HttpGet(String.valueOf(url)))) {
-                        HttpEntity entity = response.getEntity();
-                        if (entity != null) {
-                            try (FileOutputStream outstream = new FileOutputStream(filePath)) {
-                                entity.writeTo(outstream);
+                        File f = new File(path);
+                        if (!f.exists()) f.mkdirs();
+                        File filePath = new File(dirFile);
+
+                        CloseableHttpClient client = HttpClients.createDefault();
+                        try (CloseableHttpResponse response = client.execute(new HttpGet(String.valueOf(url)))) {
+                            HttpEntity entity = response.getEntity();
+                            if (entity != null) {
+                                try (FileOutputStream outstream = new FileOutputStream(filePath)) {
+                                    entity.writeTo(outstream);
+                                }
                             }
                         }
+                        System.out.println(nyaaUrlList.get(listNum).getFileName() + " 다운 완료");
                     }
-                    System.out.println(nyaaUrlList.get(i).getFileName() + " 다운 완료");
-                }
-            } else {
-                String name = nyaaUrlList.get(listNum).getFileName();
-                URL url = new URL(nyaaUrlList.get(listNum).getFileUrl());
-
-                String dirFile = "D:\\RssExam\\" + name + ".torrent";
-                String path = dirFile.substring(0, dirFile.lastIndexOf(File.separator));
-
-                File f = new File(path);
-                if (!f.exists()) {
-                    f.mkdirs();
-                }
-                File filePath = new File(dirFile);
-
-
-                CloseableHttpClient client = HttpClients.createDefault();
-                try (CloseableHttpResponse response = client.execute(new HttpGet(String.valueOf(url)))) {
-                    HttpEntity entity = response.getEntity();
-                    if (entity != null) {
-                        try (FileOutputStream outstream = new FileOutputStream(filePath)) {
-                            entity.writeTo(outstream);
-                        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("파일 저장 오류");
+                } finally {
+                    try {
+                        if (in != null)in.close();
+                        if (out != null) out.close();
+                    } catch (IOException ioe) {
                     }
                 }
-                System.out.println(nyaaUrlList.get(listNum).getFileName() + " 다운 완료");
             }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("파일 저장 오류");
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException ioe) {
-            }
-        }
+        });
+        thread.start();
 
     }
 
@@ -227,7 +221,6 @@ public class NyaaFeedParser {
                         message.setPubDate(pubDate);
                         message.setTitle(title);
 
-
                         nyaaFeed.getMessages().add(message);
                         event = eventReader.nextEvent();
                         continue;
@@ -248,9 +241,6 @@ public class NyaaFeedParser {
         if (event instanceof Characters) {
             result = event.asCharacters().getData();
         }
-
-
         return result;
     }
-
 }

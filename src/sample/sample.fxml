@@ -4,105 +4,83 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <center>
-      <Pane>
+<BorderPane prefHeight="830.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <center>
+        <Pane>
          <children>
-            <GridPane fx:id="table_Pane" focusTraversable="true" hgap="5.0" minHeight="664.0" minWidth="1000.0" prefWidth="1016.0" vgap="5.0">
-                <opaqueInsets>
-                    <Insets />
-                </opaqueInsets>
-                <columnConstraints>
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints />
-                    <RowConstraints />
-                    <RowConstraints />
-                    <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints valignment="BOTTOM" />
-                  <RowConstraints valignment="BOTTOM" />
-                  <RowConstraints valignment="BOTTOM" />
-                </rowConstraints>
-                <children>
-                    <TableView fx:id="myTableView" focusTraversable="false" prefHeight="671.0" prefWidth="1029.0" tableMenuButtonVisible="true">
-                        <columns>
-                            <TableColumn fx:id="title_Column" prefWidth="330.0" text="이름" />
-                            <TableColumn fx:id="category_Column" prefWidth="105.0" text="분류" />
-                            <TableColumn fx:id="pubDate_Column" prefWidth="122.0" text="등록일" />
-                            <TableColumn fx:id="seeder_Column" prefWidth="73.0" text="시더" />
-                            <TableColumn fx:id="down_Column" prefWidth="112.0" text="다운로드 누적" />
-                            <TableColumn fx:id="size_Column" prefWidth="84.0" text="크기" />
-                            <TableColumn fx:id="pageLink_Column" prefWidth="144.0" text="페이지 링크" />
-                        </columns>
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                    </TableView>
-                </children>
-            </GridPane>
+            <TableView fx:id="myTableView" layoutX="12.0" prefHeight="695.0" prefWidth="975.0" tableMenuButtonVisible="true">
+                <columns>
+                    <TableColumn fx:id="title_Column" prefWidth="340.99998474121094" text="이름" />
+                    <TableColumn fx:id="category_Column" prefWidth="81.0" text="분류" />
+                    <TableColumn fx:id="pubDate_Column" prefWidth="122.0" text="등록일" />
+                    <TableColumn fx:id="seeder_Column" prefWidth="52.0" text="시더" />
+                    <TableColumn fx:id="down_Column" prefWidth="133.0" text="다운로드 누적" />
+                    <TableColumn fx:id="size_Column" prefWidth="92.0" text="크기" />
+                    <TableColumn fx:id="pageLink_Column" minWidth="0.0" prefWidth="131.0" text="페이지 링크" />
+                </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TableView>
          </children>
-      </Pane>
-   </center>
-   <top>
-      <Pane prefHeight="63.0" prefWidth="207.0" BorderPane.alignment="CENTER">
-         <children>
-                <TextField layoutX="430.0" layoutY="13.0" prefHeight="37.0" prefWidth="587.0" />
-                <Button id="btn_src" fx:id="btn_src" layoutX="1029.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnTest" prefHeight="37.0" prefWidth="156.0" text="검색" />
-                <ComboBox layoutX="203.0" layoutY="16.0" prefHeight="30.0" prefWidth="215.0" />
-            <Pane layoutX="-1.0" prefHeight="62.0" prefWidth="194.0">
-               <children>
-                  <Button layoutX="11.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnRss" prefHeight="37.0" prefWidth="173.0" text="RSS 주소 추가" />
-               </children></Pane>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </Pane>
-   </top>
-   <left>
-      <Pane prefHeight="600.0" prefWidth="191.0" BorderPane.alignment="CENTER">
-         <children>
-            <ListView layoutY="47.0" prefHeight="624.0" prefWidth="191.0" />
-            <Button layoutX="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="173.0" text="즐겨찾기 추가" />
-            <ProgressBar layoutX="201.0" layoutY="681.0" prefHeight="18.0" prefWidth="987.0" progress="0.0" />
-         </children>
-      </Pane>
-   </left>
-   <bottom>
-      <Pane prefHeight="52.0" prefWidth="1207.0" BorderPane.alignment="CENTER">
-         <children>
-            <Pane prefHeight="54.0" prefWidth="790.0">
-               <children>
-                  <Button layoutX="7.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="79.0" text="저장 위치" />
-                  <TextField layoutX="93.0" layoutY="9.0" prefHeight="37.0" prefWidth="469.0" />
-               </children>
-            </Pane>
-            <Pane layoutX="828.0" layoutY="-1.0" prefHeight="54.0" prefWidth="362.0">
-               <children>
-                  <Button id="check_Down" layoutX="39.0" layoutY="7.0" mnemonicParsing="false" onAction="#check_Down" prefHeight="37.0" prefWidth="150.0" text="선택 항목 다운" />
-                  <Button layoutX="208.0" layoutY="7.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="150.0" text="전체 목록 다운" />
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-   </bottom>
-   <padding>
-      <Insets bottom="10.0" left="10.0" />
-   </padding>
+        </Pane>
+    </center>
+    <top>
+        <Pane prefHeight="63.0" prefWidth="207.0" BorderPane.alignment="CENTER">
+            <children>
+
+                <TextField fx:id="text_Src" layoutX="430.0" layoutY="13.0" prefHeight="37.0" prefWidth="587.0" />
+
+                <Button fx:id="btn_Src" layoutX="1029.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnTest" prefHeight="37.0" prefWidth="156.0" text="검색" />
+
+                <ComboBox fx:id="combo_src" layoutX="203.0" layoutY="16.0" prefHeight="30.0" prefWidth="215.0" />
+
+                <Pane layoutX="-1.0" prefHeight="62.0" prefWidth="194.0">
+
+                    <children>
+                        <Button layoutX="11.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnRss" prefHeight="37.0" prefWidth="173.0" text="RSS 주소 추가" />
+                    </children>
+                </Pane>
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </Pane>
+    </top>
+    <left>
+        <Pane prefHeight="600.0" prefWidth="191.0" BorderPane.alignment="CENTER">
+            <children>
+                <ListView fx:id="list_fvo" layoutY="47.0" prefHeight="648.0" prefWidth="191.0" />
+                <Button fx:id="btn_fvo" layoutX="9.0" mnemonicParsing="false" onAction="#btnFvo" prefHeight="37.0" prefWidth="173.0" text="즐겨찾기 추가" />
+            </children>
+        </Pane>
+    </left>
+    <bottom>
+        <Pane prefHeight="52.0" prefWidth="1207.0" BorderPane.alignment="CENTER">
+            <children>
+                <Pane prefHeight="54.0" prefWidth="790.0">
+                    <children>
+                        <Button fx:id="btn_saveFolder" layoutX="7.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="79.0" text="저장 위치" />
+                        <TextField fx:id="text_savaFolder" layoutX="93.0" layoutY="9.0" prefHeight="37.0" prefWidth="469.0" />
+                    </children>
+                </Pane>
+                <Pane layoutX="828.0" layoutY="-1.0" prefHeight="54.0" prefWidth="362.0">
+                    <children>
+                        <Button fx:id="btn_checkDown" layoutX="39.0" layoutY="7.0" mnemonicParsing="false" onAction="#check_Down" prefHeight="37.0" prefWidth="150.0" text="선택 항목 다운" />
+
+                        <Button fx:id="btn_allDown" layoutX="208.0" layoutY="7.0" mnemonicParsing="false" onAction="#all_Down" prefHeight="37.0" prefWidth="150.0" text="전체 목록 다운" />
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </bottom>
+    <padding>
+        <Insets bottom="10.0" left="10.0" />
+    </padding>
 </BorderPane>

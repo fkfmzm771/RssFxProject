@@ -19,6 +19,6 @@
 
     <!-- sql 맵퍼 -->
     <mappers>
-        <mapper resource="sql.xml"/>
+        <mapper resource="Mapper.xml"/>
     </mappers>
 </configuration>

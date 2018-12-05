@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="commons-codec-1.9">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/jar_files/commons-codec-1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/jar_files/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/jar_files/httpclient-4.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/jar_files/httpcore-4.4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/jar_files/mybatis-3.4.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/jar_files/ojdbc8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
