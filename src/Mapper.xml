@@ -39,11 +39,12 @@
         , #{user_downCheck}
         , #{user_lastDownDate}
         )
+
     </insert>
 
     <!--//Rss 검색 주소 항목-->
-    <select id="insertSrcRss" resultType="VO.SrcRss" parameterType="VO.SrcRss">
-        INSERT INTO userRss
+    <insert id="insertSrcRss"  parameterType="VO.SrcRss">
+        INSERT INTO userSrcRss
         (
         src_alias
         ,src_rssAdr
@@ -53,39 +54,68 @@
         #{src_alias}
         , #{src_rssAdr}
         )
-    </select>
+    </insert>
 
     <!--//즐겨찾기 항목-->
-    <select id="insertUserRss" resultType="VO.UserRss" parameterType="VO.UserRss">
+    <insert id="insertUserRss"  parameterType="VO.UserRss">
         INSERT INTO userRss
         (
-        to_alias
-        ,to_rssAdr
+        to_alias ,to_rssAdr
         )
         VALUES
         (
         #{alias}
         , #{rssAdr}
         )
+    </insert>
+
+    <select id="selectListItem" resultType="VO.Nyaa_si_FeedMessage" parameterType="String">
+        select
+
+        to_title
+        ,to_link
+        ,to_guId
+        ,to_pubDate
+        ,to_seeders
+        ,to_leechers
+        ,to_downloads
+        ,to_infoHash
+        ,to_categoryID
+        ,to_category
+        ,to_to_size
+        ,to_alias
+        ,to_downloadCheck
+        ,to_lastDownDate
+
+        from srctorrent  where  to_alias = #{alias}
+
     </select>
 
 
-    <!--<select id="selectAllBoard" resultType="VO.Board">-->
-        <!--select-->
-        <!--boardseq,-->
-        <!--id,-->
-        <!--boardtitle,-->
-        <!--boardcontent,-->
-        <!--indate,-->
-        <!--hitcount-->
-        <!--from-->
-        <!--board-->
-    <!--</select>-->
+
+    <select id="selectSrcRss" resultType="VO.SrcRss" parameterType="VO.SrcRss">
+        select
+        src_alias,
+        src_rssAdr
+        from
+        USERRSS
+
+    </select>
+
+    <select id="selectUserRss" resultType="VO.UserRss" parameterType="VO.UserRss">
+        select
+        to_alias,
+        to_rssAdr
+        from
+        USERRSS
+
+    </select>
+
 
     <!--<update id="increseHit" parameterType="String">-->
-        <!--update board set-->
-        <!--hitcount=hitcount+1-->
-        <!--where boardseq=#{boardSeq}-->
+    <!--update board set-->
+    <!--hitcount=hitcount+1-->
+    <!--where boardseq=#{boardSeq}-->
     <!--</update>-->
 
 </mapper>

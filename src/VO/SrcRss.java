@@ -4,6 +4,9 @@ public class SrcRss {
     private String src_alias;
     private String src_rssAdr;
 
+    public SrcRss() {
+    }
+
     public SrcRss(String alias, String rssAdr) {
         this.src_alias = alias;
         this.src_rssAdr = rssAdr;

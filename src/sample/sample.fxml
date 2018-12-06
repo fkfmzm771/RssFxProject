@@ -3,12 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="830.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <center>
@@ -56,7 +58,7 @@
     <left>
         <Pane prefHeight="600.0" prefWidth="191.0" BorderPane.alignment="CENTER">
             <children>
-                <ListView fx:id="list_fvo" layoutY="47.0" prefHeight="648.0" prefWidth="191.0" />
+                <ListView id="list_Fov" fx:id="list_Fov" layoutY="47.0" prefHeight="648.0" prefWidth="191.0" />
                 <Button fx:id="btn_fvo" layoutX="9.0" mnemonicParsing="false" onAction="#btnFvo" prefHeight="37.0" prefWidth="173.0" text="즐겨찾기 추가" />
             </children>
         </Pane>
@@ -67,7 +69,12 @@
                 <Pane prefHeight="54.0" prefWidth="790.0">
                     <children>
                         <Button fx:id="btn_saveFolder" layoutX="7.0" layoutY="9.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="79.0" text="저장 위치" />
-                        <TextField fx:id="text_savaFolder" layoutX="93.0" layoutY="9.0" prefHeight="37.0" prefWidth="469.0" />
+                        <TextField id="filePath" fx:id="filePath" layoutX="93.0" layoutY="9.0" prefHeight="37.0" prefWidth="350.0" />
+                  <Label fx:id="src_text" layoutX="464.0" layoutY="12.0" prefHeight="17.0" prefWidth="353.0">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
                     </children>
                 </Pane>
                 <Pane layoutX="828.0" layoutY="-1.0" prefHeight="54.0" prefWidth="362.0">

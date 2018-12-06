@@ -4,6 +4,10 @@ public class UserRss {
     private String alias;
     private String rssAdr;
 
+
+    public UserRss() {
+    }
+
     public UserRss(String alias, String rssAdr) {
         this.alias = alias;
         this.rssAdr = rssAdr;
