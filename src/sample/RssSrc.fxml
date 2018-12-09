@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane hgap="5.0" maxHeight="549.0" maxWidth="802.0" minHeight="495.0" minWidth="802.0" prefHeight="501.0" prefWidth="802.0" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+    </rowConstraints>
+    <children>
+        <TableView prefHeight="354.0" prefWidth="771.0" tableMenuButtonVisible="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <columns>
+                <TableColumn prefWidth="210.0" text="별칭" />
+                <TableColumn prefWidth="547.0" text="Rss 주소" />
+
+            </columns>
+        </TableView>
+        <Pane prefHeight="77.0" prefWidth="771.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <children>
+                <TextField layoutX="232.0" layoutY="30.0" prefHeight="37.0" prefWidth="457.0" />
+                <Button layoutX="706.0" layoutY="30.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="65.0" text="추가" />
+            <TextField layoutY="30.0" prefHeight="37.0" prefWidth="212.0" />
+            <Label layoutX="4.0" layoutY="13.0" prefHeight="14.0" prefWidth="55.0" text="별칭" />
+            <Label layoutX="236.0" layoutY="13.0" prefHeight="14.0" prefWidth="55.0" text="RSS 주소" />
+            </children>
+        </Pane>
+      <Pane prefHeight="37.0" prefWidth="771.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+         <children>
+            <Button id="btn_Close" fx:id="btn_Close" layoutX="668.0" layoutY="-4.0" mnemonicParsing="false" onAction="#exitPopup" prefHeight="37.0" prefWidth="103.0" text="닫기" />
+         </children>
+      </Pane>
+    </children>
+</GridPane>

@@ -2,18 +2,18 @@ package DAO;
 
 
 import VO.Nyaa_si_FeedMessage;
-import VO.SrcRss;
-import VO.UserRss;
+import VO.RssSrc;
+import VO.WebSiteRss;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.util.ArrayList;
 
-public class DAOManager{
+public class DAOManager {
 
-    private static SqlSessionFactory factory = MybatisConfig.getSqlSessionFactory();
+    private SqlSessionFactory factory = MybatisConfig.getSqlSessionFactory();
 
-    public static boolean insertRssTorrent(Nyaa_si_FeedMessage feedMessage) {
+    public boolean insertRssTorrent(Nyaa_si_FeedMessage feedMessage) {
         SqlSession session = null;
         int cnt = 0;
 
@@ -35,7 +35,68 @@ public class DAOManager{
             return true;
     }
 
-    public static boolean insertSrcRss(SrcRss srcRss) {
+    public ArrayList<Nyaa_si_FeedMessage> selectListItem(String alias) {
+
+        ArrayList<Nyaa_si_FeedMessage> messages = null;
+        SqlSession session = null;
+
+        try {
+            session = factory.openSession();
+            Mapper mapper = session.getMapper(Mapper.class);
+            messages = mapper.selectListItem(alias);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+
+        return messages;
+    }
+
+
+    //사용자 검색 사이트 추가
+    public boolean insertWebSiteRss(WebSiteRss webSiteRss) {
+        SqlSession session = null;
+        int cnt = 0;
+
+        try {
+            session = factory.openSession();
+            Mapper mapper = session.getMapper(Mapper.class);
+            cnt = mapper.insertWebSiteRss(webSiteRss);
+
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+
+        if (cnt == 0)
+            return false;
+        else
+            return true;
+    }
+
+    public ArrayList<WebSiteRss> selectWebSiteRss() {
+        ArrayList<WebSiteRss> webSiteRsses = null;
+        SqlSession session = null;
+
+        try {
+            session = factory.openSession();
+            Mapper mapper = session.getMapper(Mapper.class);
+            webSiteRsses = mapper.selectWebSiteRss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+
+        return webSiteRsses;
+    }
+
+
+    //사용자 즐겨찾기 추가
+    public boolean insertSrcRss(RssSrc srcRss) {
         SqlSession session = null;
         int cnt = 0;
 
@@ -57,47 +118,23 @@ public class DAOManager{
             return true;
     }
 
-    public static boolean insertUserRss(UserRss userRss) {
+    public ArrayList<RssSrc> selectSrcRss() {
         SqlSession session = null;
-        int cnt = 0;
+        ArrayList<RssSrc> messages = null;
 
         try {
             session = factory.openSession();
             Mapper mapper = session.getMapper(Mapper.class);
-            cnt = mapper.insertUserRss(userRss);
 
-            session.commit();
+            messages = mapper.selectSrcRss();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (session != null) session.close();
         }
 
-        if (cnt == 0)
-            return false;
-        else
-            return true;
-    }
-
-
-    public static ArrayList<Nyaa_si_FeedMessage> selectListItem(String alias){
-
-        ArrayList<Nyaa_si_FeedMessage> messages = new ArrayList<>();
-        SqlSession session = null;
-        Nyaa_si_FeedMessage feedMessage = null;
-        try {
-            session = factory.openSession();
-            Mapper mapper = session.getMapper(Mapper.class);
-            messages = mapper.selectListItem(alias);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (session != null) session.close();
-        }
         return messages;
-
     }
+
 
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DAO.Mapper">
+
+    <!--//토런트 데이터-->
+    <insert id="insertRssTorrent" parameterType="Nyaa">
+        INSERT INTO srcTorrent
+        (
+            TITLE
+            ,LINK
+            ,GUID
+            ,PUBDATE
+            ,SEEDERS
+            ,LEECHERS
+            ,DOWNLOADS
+            ,INFOHASH
+            ,CATEGORYID
+            ,CATEGORY
+            ,TORRENTSIZE
+            ,ALIAS
+            ,DOWNLOADCHECK
+            ,LASTDOWNDATE
+        )
+        VALUES
+        (
+            #{title}
+            , #{link}
+            , #{guid}
+            , #{pubDate}
+            , #{nyaa_seeders}
+            , #{nyaa_leechers}
+            , #{nyaa_downloads}
+            , #{nyaa_infoHash}
+            , #{nyaa_categoryId}
+            , #{nyaa_category}
+            , #{nyaa_size}
+            , #{user_alias}
+            , #{user_downCheck}
+            , #{user_lastDownDate}
+        )
+
+    </insert>
+
+    <select id="selectListItem" parameterType="String" resultType="Nyaa" >
+        select
+            TITLE
+            ,LINK
+            ,GUID
+            ,PUBDATE
+            ,SEEDERS
+            ,LEECHERS
+            ,DOWNLOADS
+            ,INFOHASH
+            ,CATEGORYID
+            ,CATEGORY
+            ,TORRENTSIZE
+            ,ALIAS
+            ,DOWNLOADCHECK
+            ,LASTDOWNDATE
+        from
+            SRCTORRENT
+        where
+            ALIAS = #{alias}
+    </select>
+
+
+    <!--사용자 웹사이트 추가-->
+    <insert id="insertWebSiteRss" parameterType="WebSiteRss">
+        INSERT INTO webSiteRss
+        (
+        SiteAlias ,SiteRssAdr
+        )
+        VALUES
+        (
+        #{siteAlias}
+        , #{siteRssAdr}
+        )
+    </insert>
+
+    <!--사용자 저장 검색 사이트 목록-->
+    <select id="selectWebSiteRss" resultType="WebSiteRss">
+        select
+            SiteAlias
+            ,SiteRssAdr
+        from
+            webSiteRss
+    </select>
+
+    <!--사용자 즐겨찾기 저장 리스트 목록-->
+    <select id="selectSrcRss" resultType="RssSrc">
+        select
+            alias
+            ,rssadr
+        from
+            SRCRSS
+    </select>
+
+    <!--사용자 즐겨찾기 추가-->
+    <insert id="insertSrcRss" parameterType="RssSrc">
+        INSERT INTO srcRss
+        (
+        alias ,rssAdr
+        )
+        VALUES
+        (
+        #{alias}
+        , #{rssAdr}
+        )
+    </insert>
+
+</mapper>

@@ -10,7 +10,7 @@ public class MybatisConfig {
 	private static SqlSessionFactory sqlSessionFactory;
 
 	static {
-		String resource = "myBatisConfig.xml";		
+		String resource = "Batis/myBatisConfig.xml";
 		
 
 		try {

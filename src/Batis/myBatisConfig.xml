@@ -2,7 +2,14 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!-- db 정보 파일을 로드한다. -->
-    <properties resource="db.properties"/>
+    <properties resource="Batis/db.properties"/>
+
+    <!--별명 설정-->
+    <typeAliases>
+        <typeAlias type="VO.Nyaa_si_FeedMessage" alias="Nyaa"/>
+        <typeAlias type="VO.RssSrc" alias="RssSrc"/>
+        <typeAlias type="VO.WebSiteRss" alias="WebSiteRss"/>
+    </typeAliases>
 
     <!-- db 연결 -->
     <environments default="development">
@@ -19,6 +26,6 @@
 
     <!-- sql 맵퍼 -->
     <mappers>
-        <mapper resource="Mapper.xml"/>
+        <mapper resource="Batis/Mapper.xml"/>
     </mappers>
 </configuration>

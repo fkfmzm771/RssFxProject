@@ -10,9 +10,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import sample.Controller;
 
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.*;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
 import java.io.*;
@@ -53,44 +51,10 @@ public class NyaaFeedParser {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                OutputStream out = null;
-                InputStream in = null;
-
-                try {
-                    for (int i = 0; i < nyaaUrlList.size(); i++) {
-                        String name = nyaaUrlList.get(i).getFileName();
-                        name = name.replaceAll("/", "_");
-                        URL url = new URL(nyaaUrlList.get(i).getFileUrl());
-
-
-                        String dirFile = "D:\\RssExam\\" + name + ".torrent";
-                        String path = dirFile.substring(0, dirFile.lastIndexOf(File.separator));
-
-                        File f = new File(path);
-                        if (!f.exists()) f.mkdirs();
-                        File filePath = new File(dirFile);
-
-                        CloseableHttpClient client = HttpClients.createDefault();
-                        try (CloseableHttpResponse response = client.execute(new HttpGet(String.valueOf(url)))) {
-                            HttpEntity entity = response.getEntity();
-                            if (entity != null) {
-                                try (FileOutputStream outstream = new FileOutputStream(filePath)) {
-                                    entity.writeTo(outstream);
-                                }
-                            }
-                        }
-                        System.out.println(nyaaUrlList.get(i).getFileName() + " 다운 완료");
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("파일 저장 오류");
-                } finally {
-                    try {
-                        if (in != null) in.close();
-                        if (out != null) out.close();
-                    } catch (IOException ioe) {
-                    }
+                for (int i = 0; i < nyaaUrlList.size(); i++) {
+                    String name = nyaaUrlList.get(i).getFileName();
+                    String url = nyaaUrlList.get(i).getFileUrl();
+                    savaStart(name, url);
                 }
             }
         });
@@ -98,48 +62,51 @@ public class NyaaFeedParser {
     }
 
     //torrent 단일 파일 저장
-    public void clickSaveFile(String fileName, String fileUrl) {
+    public void saveFileItemClick(String fileName, String fileUrl) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                OutputStream out = null;
-                InputStream in = null;
-
-                try {
-                    String name = fileName;
-                    name = name.replaceAll("/", "_");
-                    URL url = new URL(fileUrl);
-
-                    String dirFile = Controller.Sfile_path + name + ".torrent";
-                    String path = dirFile.substring(0, dirFile.lastIndexOf(File.separator));
-
-                    File f = new File(path);
-                    if (!f.exists()) f.mkdirs();
-                    File filePath = new File(dirFile);
-
-                    CloseableHttpClient client = HttpClients.createDefault();
-                    try (CloseableHttpResponse response = client.execute(new HttpGet(String.valueOf(url)))) {
-                        HttpEntity entity = response.getEntity();
-                        if (entity != null) {
-                            try (FileOutputStream outstream = new FileOutputStream(filePath)) {
-                                entity.writeTo(outstream);
-                            }
-                        }
-                    }
-                    System.out.println(fileName + " 다운 완료");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("파일 저장 오류");
-                } finally {
-                    try {
-                        if (in != null) in.close();
-                        if (out != null) out.close();
-                    } catch (IOException ioe) {
-                    }
-                }
+                savaStart(fileName, fileUrl);
             }
         });
         thread.start();
+    }
+
+    public void savaStart(String name, String sUrl) {
+        OutputStream out = null;
+        InputStream in = null;
+        try {
+
+            URL url = new URL(sUrl);
+            name = name.replaceAll("/", "_");
+
+            String dirFile = Controller.Sfile_path + name + ".torrent";
+            String path = dirFile.substring(0, dirFile.lastIndexOf(File.separator));
+
+            File f = new File(path);
+            if (!f.exists()) f.mkdirs();
+            File filePath = new File(dirFile);
+
+            CloseableHttpClient client = HttpClients.createDefault();
+            try (CloseableHttpResponse response = client.execute(new HttpGet(String.valueOf(url)))) {
+                HttpEntity entity = response.getEntity();
+                if (entity != null) {
+                    try (FileOutputStream outstream = new FileOutputStream(filePath)) {
+                        entity.writeTo(outstream);
+                    }
+                }
+            }
+            System.out.println(name + " 다운 완료");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("파일 저장 오류");
+        } finally {
+            try {
+                if (in != null) in.close();
+                if (out != null) out.close();
+            } catch (IOException ioe) {
+            }
+        }
     }
 
 
@@ -189,6 +156,7 @@ public class NyaaFeedParser {
                 if (event.isStartElement()) {
                     String localPart = event.asStartElement().getName().getLocalPart();
                     switch (localPart) {
+
                         case ITEM:
                             if (isFeedHeader) {
                                 isFeedHeader = false;
@@ -265,6 +233,19 @@ public class NyaaFeedParser {
             throws XMLStreamException {
         String result = "";
         event = eventReader.nextEvent();
+
+//        switch (event.getEventType()) {
+//            case XMLStreamConstants.CHARACTERS:
+//            case XMLStreamConstants.CDATA:
+//                break;
+//            default:
+//                break;
+//        }
+//        if (event.asCharacters().isCData()) {
+//            System.out.println("cdata 체크");
+//
+//        }
+
 
         if (event instanceof Characters) {
             result = event.asCharacters().getData();

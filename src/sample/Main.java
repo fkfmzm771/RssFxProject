@@ -21,7 +21,6 @@ public class Main extends Application {
         primaryStage.setTitle("Torrent Rss 검색기");
         primaryStage.setScene(new Scene(root, 1200, 830));
         primaryStage.setResizable(false);
-
         primaryStage.show();
     }
 

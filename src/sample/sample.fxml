@@ -41,12 +41,12 @@
 
                 <Button fx:id="btn_Src" layoutX="1029.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnTest" prefHeight="37.0" prefWidth="156.0" text="검색" />
 
-                <ComboBox fx:id="combo_src" layoutX="203.0" layoutY="16.0" prefHeight="30.0" prefWidth="215.0" />
+                <ComboBox id="rss_SiteList" fx:id="rss_SiteList" layoutX="203.0" layoutY="16.0" prefHeight="30.0" prefWidth="215.0" promptText="Nyaa.si" />
 
                 <Pane layoutX="-1.0" prefHeight="62.0" prefWidth="194.0">
 
                     <children>
-                        <Button layoutX="11.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnRss" prefHeight="37.0" prefWidth="173.0" text="RSS 주소 추가" />
+                        <Button id="btn_Rss" fx:id="btn_Rss" layoutX="11.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnRss" prefHeight="37.0" prefWidth="173.0" text="RSS 주소 추가" />
                     </children>
                 </Pane>
             </children>
@@ -59,7 +59,7 @@
         <Pane prefHeight="600.0" prefWidth="191.0" BorderPane.alignment="CENTER">
             <children>
                 <ListView id="list_Fov" fx:id="list_Fov" layoutY="47.0" prefHeight="648.0" prefWidth="191.0" />
-                <Button fx:id="btn_fvo" layoutX="9.0" mnemonicParsing="false" onAction="#btnFvo" prefHeight="37.0" prefWidth="173.0" text="즐겨찾기 추가" />
+                <Button id="btn_Fov" fx:id="btn_Fov" layoutX="9.0" mnemonicParsing="false" onAction="#btnFvo" prefHeight="37.0" prefWidth="173.0" text="즐겨찾기 추가" />
             </children>
         </Pane>
     </left>
