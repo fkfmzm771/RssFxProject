@@ -48,7 +48,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<TableRowDataModel, String> pageLink_Column;
     @FXML
-    private Button btn_Src;
+    private Button btn_src;
     @FXML
     private TextField text_Src;
     @FXML
@@ -171,6 +171,7 @@ public class Controller implements Initializable {
         rss_SiteList.getItems().add("horriblesubs");
         rss_SiteList.getItems().add("Ohys-Raws");
         filePath.setText("D:\\RssExam");
+        rss_SiteList.getSelectionModel().selectFirst();
     }
 
 
@@ -178,7 +179,7 @@ public class Controller implements Initializable {
         btn_Fov.setDisable(false);
         myTableView.setItems(FXCollections.observableArrayList());
 
-        btn_Src.setDisable(true);
+        btn_src.setDisable(true);
         String srcTitle = text_Src.getText();
 
         torrentList = new ArrayList<>();
@@ -186,41 +187,39 @@ public class Controller implements Initializable {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (rss_SiteList.getPromptText().equals("Nyaa.si")) {
-                    src_title = "https://nyaa.si/?page=rss&q=" + srcTitle;
-                } else {
+//                if (rss_SiteList.getPromptText().equals("Nyaa.si")) {
+//                    src_title = "https://nyaa.si/?page=rss&q=" + srcTitle;
+//                } else {
 
-                    switch (rss_SiteList.getValue()) {
-                        case "Nyaa.si":
-                            src_title = "https://nyaa.si/?page=rss&q=" + srcTitle;
-                            break;
-                        case "도쿄도서관":
-                            src_title = "https://www.tokyotosho.info/rss.php?terms=" + srcTitle;
-                            break;
-                        case "leopard":
-                            src_title = "http://leopard-raws.org/rss.php?search=" + srcTitle;
-                            break;
-                        case "horriblesubs":
-                            src_title = "http://horriblesubs.info/rss.php?res=" + srcTitle;
-                            break;
-                        case "Ohys-Raws":
-                            src_title = "https://torrents.ohys.net/download/rss.php?dir=new&q=" + srcTitle;
-                            break;
+                switch (rss_SiteList.getValue()) {
+                    case "Nyaa.si":
+                        src_title = "https://nyaa.si/?page=rss&q=" + srcTitle;
+                        break;
+                    case "도쿄도서관":
+                        src_title = "https://www.tokyotosho.info/rss.php?terms=" + srcTitle;
+                        break;
+                    case "leopard":
+                        src_title = "http://leopard-raws.org/rss.php?search=" + srcTitle;
+                        break;
+                    case "horriblesubs":
+                        src_title = "http://horriblesubs.info/rss.php?res=" + srcTitle;
+                        break;
+                    case "Ohys-Raws":
+                        src_title = "https://torrents.ohys.net/download/rss.php?dir=new&q=" + srcTitle;
+                        break;
 
-                    }
+//                    }
                 }
-
-
                 parser = new NyaaFeedParser(src_title);
 
-                feed = parser.readFeed();
 
                 try {
-                    if (feed == null) {
+                    if (parser == null) {
                         System.out.println("리턴");
-                        btn_Src.setDisable(false);
+                        btn_src.setDisable(false);
                         return;
                     }
+                    feed = parser.readFeed();
 
                     for (Nyaa_si_FeedMessage message : feed.getMessages()) {
                         parser.saveUrlList(new FileData(message.getTitle(), message.getLink()));
@@ -244,7 +243,7 @@ public class Controller implements Initializable {
                     e.printStackTrace();
                     System.out.println("검색된 파일이 없습니다.");
                 } finally {
-                    btn_Src.setDisable(false);
+                    btn_src.setDisable(false);
                 }
             }
         };

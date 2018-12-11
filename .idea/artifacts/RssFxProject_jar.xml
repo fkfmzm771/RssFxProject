@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RssFxProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RssFxProject_jar</output-path>
+    <root id="archive" name="RssFxProject.jar">
+      <element id="module-output" name="RssFxProject" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jar_files/mybatis-3.4.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jar_files/httpclient-4.5.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jar_files/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jar_files/commons-codec-1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jar_files/ojdbc8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jar_files/httpcore-4.4.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
